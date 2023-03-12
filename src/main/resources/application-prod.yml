@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+spring:
+  datasource:
+    username: ${POSTGRES_USER}
+    url: ${POSTGRES_URL}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true

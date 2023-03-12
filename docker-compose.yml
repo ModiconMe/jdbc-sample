@@ -1,0 +1,32 @@
+services:
+  webapp:
+    image: modiconme/webapp:latest
+    container_name: webapp
+    ports:
+      - "8080:8080"
+    networks:
+      - webapp-network
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - webapp-network
+    restart: unless-stopped
+#    volumes:
+#      - ./pgdata:/data/postgres сохраняет данные
+
+networks:
+  webapp-network:
+    driver: bridge
